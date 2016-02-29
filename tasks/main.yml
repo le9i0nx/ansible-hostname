@@ -13,12 +13,10 @@
     mode: 0644
 
 - name: Update the hostname - (/etc/hosts)
-  lineinfile:
-    dest:   '/etc/hosts'
-    regexp: '{{ item.regexp }}'
-    line:   '{{ item.line }}'
-    state:  '{{ item.state | default("present") }}'
-  with_items:
-    - "{{ hostname_hosts }}"
-    - "{{ hostname_hosts_add }}"
+  template:
+    src: etc/hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
 
