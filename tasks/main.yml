@@ -1,5 +1,12 @@
 ---
 
+- name: Install Dbus
+  package:
+    name: dbus
+    state: present
+  when: ((ansible_service_mgr|d()) and
+        (ansible_service_mgr in [ "systemd" ]))
+
 - name: Update the hostname - hostname cmd
   hostname:
     name: "{{hostname_short}}"
