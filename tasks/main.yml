@@ -10,6 +10,7 @@
 - name: Update the hostname - hostname cmd
   hostname:
     name: "{{hostname_short}}"
+  when: (ansible_virtualization_type != 'lxc' and ansible_service_mgr == 'systemd')
 
 - name: Update the hostname - (/etc/hostname)
   copy:
